@@ -1,6 +1,8 @@
 <?php
 
 
+//This script will process payment of money to wallet and update database records.
+
 // initiate connection with database
 $servername="localhost";
 
@@ -106,7 +108,7 @@ else{
 
 
 //announce outcome of operation after all steps have been concluded
-if( mysqli_query($conn, $history))
+if( mysqli_query($conn, $transact_history))
 {
 printf("<p class='design' style='color:purple; text-align:center;'> Wallet has been funded.</p>");
 }
