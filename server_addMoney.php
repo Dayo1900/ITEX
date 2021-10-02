@@ -1,5 +1,5 @@
 <?php
-//this script will update the account balance anytime money is added to a wallet
+
 
 // initiate connection with database
 $servername="localhost";
@@ -20,37 +20,40 @@ if (!$conn)
   die("Connection failed: Unable to connect to server" . mysqli_connect_error());
 }
 
-//In a real situation, a message will be sent to online card operator to deduct the stipulated amount from source. 
+//In a real situation, a message will be sent to the appropriate online card operator to deduct the stipulated amount from source. 
 //I'm assuming here that the merchant has deducted from source and sent me the money 
 //So the next thing I want to do is insert the money into my database and keep records
 
 
 //insert data into database
-$submit_1 = "INSERT INTO registration (addMoney, transaction_history) VALUES ($addMoney, '$transaction_history') WHERE ID = $id";  //$addMoney and $id are integers so they are not inside quotations.
+$submit_1 = "INSERT INTO registration (addMoney) VALUES ($addMoney) WHERE ID = $id";  //$addMoney and $id are integers so they are not inside quotations.
 
-if(mysqli_query($conn, $submit_1))  //if inserted successfully proceed with these steps
+//if inserted successfully proceed with these steps
+if(mysqli_query($conn, $submit_1))  
 {
 //calculate the account balance 
 $account_1 = "SELECT SUM(addMoney) FROM registration WHERE ID = $id";
 $account_one=mysqli_query($conn, $account_1);
 
-while ($account1result = mysqli_fetch_assoc($account_one))    //fetch associative array
+//fetch associative array
+while ($account1result = mysqli_fetch_assoc($account_one))    
 
-{ 
-    $accountOne = $account1result['SUM(addMoney)'];     //this is the total sum of money that has ever entered the account
+{   //this is the total sum of money that has ever entered the account
+    $accountOne = $account1result['SUM(addMoney)'];     
 }
 
 
 $account_2 = "SELECT SUM(withdrawMoney) FROM registration WHERE ID = $id";
 $account_two=mysqli_query($conn, $account_2);
 
-while ($account2result = mysqli_fetch_assoc($account_two))     //fetch associative array
+//fetch associative array
+while ($account2result = mysqli_fetch_assoc($account_two))     
 
-{ 
-    $accountTwo = $account2result['SUM(withdrawMoney)'];    //this is the total sum of money that was ever withdrawn from the account
+{   //this is the total sum of money that was ever withdrawn from the account
+    $accountTwo = $account2result['SUM(withdrawMoney)'];    
 }
-
-$account = $accountOne - $accountTwo;
+//this is the new account balance
+$account = $accountOne - $accountTwo;       
 }
 
 else
@@ -59,12 +62,14 @@ echo "<p class='design' style='text-align:center;'>Unable to submit to database 
 }
 
 
-//insert account into account_balance
+//insert balance into account_balance
 if (mysqli_query($conn, $account_1) && mysqli_query($conn, $account_2))
-{
-    $submit_2 = "INSERT INTO registration (account_balance) VALUES ($account) WHERE ID = $id";    //this will create a new record inside account_balance
+{   
+    //this will add a new record to account_balance
+    $submit_2 = "INSERT INTO registration (account_balance) VALUES ($account) WHERE ID = $id";    
     
-    $_SESSION['account_balance'] = $account;   //update the account_balance session variable to reflect in other pages where it's needed
+    //update the account_balance session variable to reflect in other pages where needed
+    $_SESSION['account_balance'] = $account;   
 }
 
 else
@@ -73,8 +78,35 @@ echo "<p class='design' style='text-align:center;'>Unable to update account bala
 }
 
 
-//announce successful operation
-if( mysqli_query($conn, $submit_2))
+
+//add a new record to transaction_history
+if (mysqli_query($conn, $submit_2))
+{
+    //this will give the money added, card used and date
+ $transaction_history= date('d-m-Y')."<br>".$addMoney." "."was received from card:".$card_number;       
+
+ $transact_history="INSERT INTO registration (transaction_history) VALUES ('$transaction_history') WHERE ID = $id";
+
+
+//this  will select all the available transaction history in an account
+$account_history = "SELECT transaction_history FROM registration WHERE ID = $id";
+$account_details=mysqli_query($conn, $account_history);
+
+while ($details = mysqli_fetch_assoc($account_history))     
+
+{   //this will hold the history of the account in session variable
+    $_SESSION['transaction_history'] = $details['transaction_history'];    
+}
+}
+
+else{
+    echo "unable to update records";
+    exit();
+}
+
+
+//announce outcome of operation after all steps have been concluded
+if( mysqli_query($conn, $history))
 {
 printf("<p class='design' style='color:purple; text-align:center;'> Wallet has been funded.</p>");
 }
