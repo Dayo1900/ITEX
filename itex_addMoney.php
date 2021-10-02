@@ -1,19 +1,20 @@
 <?php session_start();
+// This page is an interface where users can fund their itex wallet.
 
-if(!isset($_SESSION['email']))                  //this will make the page assessible to only logged in users
+if(!isset($_SESSION['email']))  //this will make the page assessible to only logged in users
   
 {echo "<p class='design'>Please <a href='itex_login.php'>log in. </a></p>";
    
 return false; 
 }
 ?>
-<!DOCTYPE html>   <!-- this page is where users will be able to add money to their wallet 
+<!DOCTYPE html>
 
 <html lang="en">
 
 <head>
 
-<title>ITEX Dashboard</title>
+<title>Fund Wallet</title>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,20 +49,23 @@ $card_number=$card_validity=$card_cvv=$addMoney=$id="";
 $card_number=check_input($_POST["card_number"]);
 $card_validity=check_input($_POST["card_validity"]);
 $card_cvv=check_input($_POST["card_cvv"]);
+$pin_number=check_input($_POST["pin_number"]);
 $addMoney=check_input($_POST["addMoney"]);
 $id=$_POST["id"];
 
-
+  //This is a dummy script that includes web API from online card operators in order to verify card credentials
+//include 'Online_CardOperator_Script.php';
 include 'server_addMoney.php';          //this will include script which will submit transaction to database.
 
-//In a real situation, $card_number, $card_validity and $card_cvv would be forwarded to visacard, mastercard etc. for verification. But I'm not their merchant so I can't take this step.
+//In a real situation, $card_number, $card_validity, $card_cvv and $pin_number would be forwarded to visacard, mastercard etc. for verification. 
+  //But I'm not their merchant and I can't take this step so I just included a dummy script Online_CardOperator_Script.php
 }
 ?>
 
 
 
 
-<!--Design the dashboard page--> 
+<!--Design the fund wallet page--> 
   <h1 style="text-align:center; color:#003399; margin-top:2.5%; font-size:2.5rem;"> Fund wallet </h1>
   <p class="design" style="margin-top:none;"> Transfer money to your itex wallet with a debit or credit card.</p>
 
@@ -78,27 +82,38 @@ include 'server_addMoney.php';          //this will include script which will su
 <div class="align">
   <label for="card_number" class="d2">16-digit number on card: </label>
    <input class="card" type="number" name="card_number" placeholder="0000 0000 0000 0000"> 
-   <span class="error"> <?php if (isset ($_POST["register"]) && (mb_strlen($_POST["card_validity"]) !=16))
+   <span class="error"> <?php if (isset ($_POST["fund_wallet"]) && (mb_strlen($_POST["card_number"]) !=16))
                              {echo "<p> Enter a 16-digit number.</p>";}      //This will ensure only 16 digits are submitted
                              ?> </span>
 </div>
 
 <div class="align"> 
 <label for="card_validity" class="d2">Card valid<br> thru: </label>
-   <input class="card" style="margin-right:none;" type="number" name="card_validity" placeholder="'0000' (month and year)"> 
-   <span class="error"> <?php if (isset ($_POST["register"]) && (mb_strlen($_POST["card_validity"]) !=4))   //This will ensure only 4 digits are submitted
+   <input class="card" style="margin-right:none;" type="number" name="card_validity" placeholder="0000 (month and year)"> 
+   <span class="error"> <?php if (isset ($_POST["fund_wallet"]) && (mb_strlen($_POST["card_validity"]) !=4))   //This will ensure only 4 digits are submitted
                              {echo "<p> Enter card expiry month.</p>";} ?> 
                              </span>
 </div>
-
+  
 
 <div class="align">
    <label for="card_cvv" class="d2">CVV: </label>
    <input class="card" title="Three digits at the back of card." type="number" name="card_cvv" placeholder="3 digits at the back of card"> 
-   <span class="error"> <?php if (isset ($_POST["register"]) && (mb_strlen($_POST["card_validity"]) !=3))   //This will ensure only 3 digits are submitted
+   <span class="error"> <?php if (isset ($_POST["fund_wallet"]) && (mb_strlen($_POST["card_cvv"]) !=3))   //This will ensure only 3 digits are submitted
                              {echo "<p> Enter card cvv.</p>";} 
                              ?> </span>
 </div>
+  
+  
+<div class="align"> 
+<label for="pin_number" class="d2">4-digit PIN: </label>
+   <input class="card" style="margin-right:none;" type="number" name="pin_number" placeholder="0000"> 
+   <span class="error"> <?php if (isset ($_POST["fund_wallet"]) && (mb_strlen($_POST["pin_number"]) !=4))   //This will ensure only 4 digits are submitted
+                             {echo "<p> Enter 4-digit PIN.</p>";} ?> 
+                             </span>
+</div>
+
+
 
 <input class="c" style="margin-top:10%;" type="submit" name="fund_wallet" value="Fund wallet">
 
