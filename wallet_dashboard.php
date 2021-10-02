@@ -1,5 +1,6 @@
 <?php session_start();
 //This page is a dashboard where users can view their account summary at a glance
+
 //Ensure users are logged in
 if(!isset($_SESSION['email']))
   
@@ -44,26 +45,26 @@ return false;
 date_default_timezone_set("Africa/Lagos");	//set time zone to Lagos
 echo date('d-m-Y') ."<br><br><br><br>";
 ?>
-//link to profile page
+<!--link to profile page-->
 <p><a class="c2" href="profile_page"> My Profile</a></p>
 </span>
 </div>
 
-//link to fund wallet
+<!--link to fund wallet-->
 <div class="dashboard" style="height:7vh; margin-top:6%;">
 <span class="firstSpan">
 <p><a class="c2" href="itex_addMoney.php"> Add money</a></p>
 <small style="margin:auto;"> Add money to your itex wallet.</small>
 </span>
 
-//link to withdraw funds 
+<!--link to withdraw funds-->
 <span class="secondSpan">
 <p><a class="c2" href="itex_withdrawMoney.php"> Withdraw money</a><p>
 <small style="margin:auto;"> Withdraw money from your itex wallet.</small>
 </span>
 </div>
 
-//display transaction history
+<!--display transaction history-->
 <div class="dashboard" style="height:auto; margin-top:6%; margin-bottom:8%; padding-top:1%;">
 <h2 style="text-align:center; color:#003399; margin-top:0.5%; text-decoration:underline;"> Transaction History </h2>
 <p style="font-size:0.7rem; font-family:'Trebuchet Ms', sans-serif;
