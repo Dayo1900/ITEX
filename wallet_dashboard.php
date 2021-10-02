@@ -47,6 +47,8 @@ echo date('d-m-Y') ."<br><br><br><br>";
 ?>
 <!--link to profile page-->
 <p><a class="c2" href="profile_page"> My Profile</a></p>
+	<!--link to delete wallet account-->
+<p><a class="c2" href="server_deleteAccount.php">Delete wallet</a></p>
 </span>
 </div>
 
