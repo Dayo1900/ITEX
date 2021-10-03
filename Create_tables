@@ -1,0 +1,31 @@
+The MySQL code for creating table 'registration'
+and table 'store_account'
+
+Table registration holds the information of normal users
+while table store_account holds some info about deactivated users.
+
+
+
+CREATE TABLE registration (
+ID int NOT NULL AUTO_INCREMENT,
+email  varchar(50)  NOT NULL,
+password  varchar(30)  NOT NULL,
+fname  varchar(50)  NOT NULL,
+sname  varchar(50)  NOT NULL,
+nin int NOT NULL,
+addMoney int,
+withdrawMoney int,
+account_balance int,
+transaction_history varchar(255),
+PRIMARY KEY(ID));
+
+
+
+
+CREATE TABLE store_account (
+email  varchar(50)  NOT NULL,
+fname  varchar(50)  NOT NULL,
+sname  varchar(50)  NOT NULL,
+nin int NOT NULL,
+account_balance int,
+PRIMARY KEY(email));
