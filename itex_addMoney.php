@@ -33,7 +33,7 @@ return false;
 {
 
 //define variables and set to empty values
-$card_number=$card_validity=$card_cvv=$addMoney=$id=""; 
+$card_number=$card_validity=$pin_number=$card_cvv=$addMoney=$id=""; 
 
 //create a function to sanitise the data input from the client-side
  function check_input($data)
