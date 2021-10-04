@@ -1,6 +1,8 @@
 # ITEX
 
-The aim is to summarise the function of each page 
+The aim is to summarise the function of each page:
+
+
 -itex_addMoney.php: This is a front page where users add money to their wallets
 
 -itex_dashboard.php: It is a front page where users can view their account details at a glance
@@ -27,12 +29,27 @@ The aim is to summarise the function of each page
 
 -server_withdrawMoney.php: backend page where money withdrawn by user is recorded in database.
 
--create tables: MYSQL script showing how tables were created on database.
+-create_tables: MYSQL script showing how tables were created in a database.
 
-In an real situation the server scripts ought to communicate directly with bank APIs and debit/credit card APIs but I don't have access to those APIs.
+
+
+In an real situation the server scripts ought to communicate directly with bank APIs
+and debit/credit card APIs but I don't have access to those APIs.
+
+
 So I made some assumptions like:
+
 The bank has approved the transaction.
+
+
 The credit/debit card company has approved the transaction.
 
+
+Then I prepared the account balance and stored the record in a table.
+
+
+
+
 Thanks a lot for your time.
+
 Regards.
