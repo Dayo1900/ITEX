@@ -3,29 +3,29 @@ and table 'store_account'
 
 Table registration holds the information of normal users
 while table store_account holds some info about deactivated users.
-
+The first step is to create a database then create tables with this schema:
 
 
 CREATE TABLE registration (
-ID int AUTO_INCREMENT,
-email  varchar(50)  NOT NULL,
-password  varchar(30)  NOT NULL,
-fname  varchar(50)  NOT NULL,
-sname  varchar(50)  NOT NULL,
+ID int AUTO_INCREMENT PRIMARY KEY,
+email  varchar(30)  NOT NULL,
+password  varchar(20)  NOT NULL,
+fname  varchar(30)  NOT NULL,
+sname  varchar(30)  NOT NULL,
 nin int NOT NULL,
 addMoney int,
 withdrawMoney int,
 account_balance int,
 transaction_history varchar(255),
-);
+) ENGINE=Innodb;
 
 
 
 
 CREATE TABLE store_account (
-email  varchar(50) PRIMARY KEY,
-fname  varchar(50)  NOT NULL,
-sname  varchar(50)  NOT NULL,
+email  varchar(30) NOT NULL PRIMARY KEY,
+fname  varchar(30)  NOT NULL,
+sname  varchar(30)  NOT NULL,
 nin int NOT NULL,
 account_balance int,
-);
+) ENGINE=Innodb;
