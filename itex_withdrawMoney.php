@@ -61,7 +61,7 @@ include 'server_withdrawMoney.php';          //this will include script which wi
 
 <!--Design the dashboard page--> 
   <h1 style="text-align:center; color:#003399; margin-top:2.5%; font-size:2.5rem;"> Withdraw </h1>
-  <p class="design" style="margin-top:none;"> Transfer money itex wallet to bank account.</p>
+  <p class="design" style="margin-top:none;"> Transfer money from itex wallet to bank account.</p>
 
 
 <form method="post" action="itex_withdrawMoney.php">
