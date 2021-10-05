@@ -32,7 +32,7 @@ return false;
 {
 
 //define variables and set to empty values
-$card_number=$card_validity=$card_cvv=$addMoney=$id=""; 
+$account_number=$account_name=$bank=$withdrawMoney=$id=""; 
 
 //create a function to sanitise the data input from the client-side
  function check_input($data)
@@ -54,11 +54,9 @@ $id=$_POST["id"];
 
 include 'server_withdrawMoney.php';          //this will include script which will submit transaction to database.
 
-//In a real situation, $card_number, $card_validity and $card_cvv would be forwarded to visacard, mastercard etc. for verification. But I'm not their merchant so I can't take this step.
+//In a real situation, $account_number, $account_name, $bank and $withdrawMoney would be forwarded to the appropriate Bank API for processing.
 }
 ?>
-
-
 
 
 <!--Design the dashboard page--> 
@@ -66,7 +64,7 @@ include 'server_withdrawMoney.php';          //this will include script which wi
   <p class="design" style="margin-top:none;"> Transfer money itex wallet to bank account.</p>
 
 
-<form method="post" action="itex_addMoney.php">
+<form method="post" action="itex_withdrawMoney.php">
 <div class="a2" style="padding-top:2%;">
 <h6 class="design" style="color:red;"> Note: This is only a demo, do not submit real bank details here!</h6>
 
