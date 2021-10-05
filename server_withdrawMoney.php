@@ -24,7 +24,9 @@ if (!$conn)
 //I'm assuming here that the bank has been credited because I don't have the needed credentials to 'talk' with banks
 //So the next thing I want to do is deduct the money from itex wallet and keep records
 
-
+// First check if there's sufficient money inside wallet
+if($_SESSION['account_balance'] >= $withdrawMoney)
+{
 //insert data into database
 $submit_1 = "INSERT INTO registration (withdrawMoney) VALUES ($withdrawMoney) WHERE ID = $id";  //$withdrawMoney and $id are integers so they are not inside quotations.
 
@@ -114,6 +116,12 @@ printf("<p class='design' style='color:purple; text-align:center;'> Money transf
 else
 {
 echo "<p class='design' style='text-align:center;'>Unable to withdraw funds at the moment: </p>" . mysqli_error($conn);
+}
+}
+
+else
+{
+echo "You don't have enough money for this transaction.";
 }
 
 mysqli_close($conn);
