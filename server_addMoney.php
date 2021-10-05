@@ -84,8 +84,8 @@ echo "<p class='design' style='text-align:center;'>Unable to update account bala
 //add a new record to transaction_history
 if (mysqli_query($conn, $submit_2))
 {
-    //this will give the money added, card used and date
- $transaction_history= date('d-m-Y')."<br>".$addMoney." "."was received from card:".$card_number;       
+    //this will give the money added and date
+ $transaction_history= date('d-m-Y')."<br>".$addMoney." "."was received from card";       
 
  $transact_history="INSERT INTO registration (transaction_history) VALUES ('$transaction_history') WHERE ID = $id";
 
@@ -96,7 +96,7 @@ $account_details=mysqli_query($conn, $account_history);
 
 while ($details = mysqli_fetch_assoc($account_history))     
 
-{   //this will hold the history of the account in session variable
+{   //this will hold the history of the account in a session variable
     $_SESSION['transaction_history'] = $details['transaction_history'];    
 }
 }
