@@ -1,128 +1,152 @@
 <?php
+error_reporting(0);
+date_default_timezone_set('Africa/Lagos');
+
+if(empty($account_name))
+{
+ echo "<p style='text-align:center; color:purple; font-family:Arial; font-weight:bold;'>Please check and correct the error below.</p>";
+return false;
+exit();
+}
+
+elseif (empty($account_number))
+{ 
+echo "<p style='text-align:center; color:purple; font-family:Arial; font-weight:bold;'>Please check and correct the error below.</p>";
+return false;
+exit();
+}
+
+
+elseif (empty($bank))
+{ 
+echo "<p style='text-align:center; color:purple; font-family:Arial; font-weight:bold;'>Please check and correct the error below.</p>";
+return false;
+exit();
+}
+
+
+elseif(empty($withdrawMoney))
+{ 
+echo "<p style='text-align:center; color:purple; font-family:Arial; font-weight:bold;'>No money transferred.</p>";
+return false;
+exit();
+}
+
+
+else{}
+
+//store as session variables
+$_SESSION['account_name'] = $account_name;
+$_SESSION['account_number'] = $account_number;
+$_SESSION['bank'] = $bank;
+$_SESSION['withdrawMoney'] = $withdrawMoney;
+
+
+
+
+
+
+
 
 
 // initiate connection with database
 $servername="localhost";
-
 $username="id17048003_gahs";
-
 $password="Temitope.1900";
-
 $databasename="id17048003_customer";
 
 
 //connect to database
 $conn=mysqli_connect($servername, $username, $password, $databasename);
 
+
 //check connection
 if (!$conn) 
 { 
-  die("Connection failed: Unable to connect to server" . mysqli_connect_error());
-}
-
-//In a real situation, a script will be sent to the appropriate bank to credit stipulated amount into bank account. 
-//I'm assuming here that the bank has been credited because I don't have the needed credentials to 'talk' with banks
-//So the next thing I want to do is deduct the money from itex wallet and keep records
-
-// First check if there's sufficient money inside wallet
-if($_SESSION['account_balance'] >= $withdrawMoney)
-{
-//insert data into database
-$submit_1 = "INSERT INTO registration (withdrawMoney) VALUES ($withdrawMoney) WHERE ID = $id";  //$withdrawMoney and $id are integers so they are not inside quotations.
-
-//if inserted successfully proceed with these steps
-if(mysqli_query($conn, $submit_1))  
-{
-//calculate the account balance 
-$account_1 = "SELECT SUM(addMoney) FROM registration WHERE ID = $id";
-$account_one=mysqli_query($conn, $account_1);
-
-//fetch associative array
-while ($account1result = mysqli_fetch_assoc($account_one))    
-
-{   //this is the total sum of money that has ever entered the account
-    $accountOne = $account1result['SUM(addMoney)'];     
+  die("Connection failed: Unable to connect to server");
 }
 
 
-$account_2 = "SELECT SUM(withdrawMoney) FROM registration WHERE ID = $id";
+//In a real situation, a message will be sent to the appropriate online card operator to deduct the stipulated amount from source. 
+//I'm assuming here that the merchant has deducted from source and sent me the money 
+//So the next thing I want to do is insert the money into my database and keep records
+
+
+//first step is to update account balance
+
+
+//find the account balance
+
+$account_2 = "SELECT account_balance FROM registration WHERE ID = $id";
+
 $account_two=mysqli_query($conn, $account_2);
 
+
+
 //fetch associative array
+
 while ($account2result = mysqli_fetch_assoc($account_two))     
-
-{   //this is the total sum of money that was ever withdrawn from the account
-    $accountTwo = $account2result['SUM(withdrawMoney)'];    
-}
-//this is the new account balance
-$account = $accountOne - $accountTwo;       
-}
-
-else
-{
-echo "<p class='design' style='text-align:center;'>Unable to submit to database at the moment: </p>" . mysqli_error($conn);    
-}
-
-
-//insert balance into account_balance
-if (mysqli_query($conn, $account_1) && mysqli_query($conn, $account_2))
 {   
-    //this will add a new record to account_balance
-    $submit_2 = "INSERT INTO registration (account_balance) VALUES ($account) WHERE ID = $id";    
+//this is the present account_balance
+$accountTwo = $account2result['account_balance'];    
+}
+
+
+if (mysqli_query($conn, $account_2))
+{
     
-    //update the account_balance session variable to reflect in other pages where needed
-    $_SESSION['account_balance'] = $account;   
+if(empty($accountTwo))
+{
+$accountTwo = 0;
 }
+elseif ($withdrawMoney > $accountTwo)
+{
+exit("<p style='text-align:center; color:purple; font-size:1.2rem;'>You do not have enough money for this transaction</p>");
+}
+elseif ($withdrawMoney <= $accountTwo)
+{
+//this is the new account balance: existing money - outgoing money
+$account = $accountTwo - $withdrawMoney; 
+$_SESSION['account'] = $account;
+}
+else{}
 
+    echo "<meta http-equiv='refresh'   content='2;url=email_withdrawMoney.php'>";
+
+
+
+}
 else
 {
-echo "<p class='design' style='text-align:center;'>Unable to update account balance at the moment: </p>" . mysqli_error($conn);    
+echo "<p class='design' style='text-align:center;'>Unable to check account at the moment: </p>";    
 }
 
-
-
-//add a new record to transaction_history
-if (mysqli_query($conn, $submit_2))
-{
-    //this will give the money deducted, bank and date
- $transaction_history= date('d-m-Y')."<br>".$withdrawMoney." "."was sent to bank:".$bank;       
-
- $transact_history="INSERT INTO registration (transaction_history) VALUES ('$transaction_history') WHERE ID = $id";
-
-
-//this  will select all the available transaction history in an account
-$account_history = "SELECT transaction_history FROM registration WHERE ID = $id";
-$account_details=mysqli_query($conn, $account_history);
-
-while ($details = mysqli_fetch_assoc($account_history))     
-
-{   //this will hold the history of the account in session variable
-    $_SESSION['transaction_history'] = $details['transaction_history'];    
-}
-}
-
-else{
-    echo "unable to update records";
-    exit();
-}
-
-
-//announce outcome of operation after all steps have been concluded
-if( mysqli_query($conn, $transact_history))
-{
-printf("<p class='design' style='color:purple; text-align:center;'> Money transferred successfully.</p>");
-}
-
-else
-{
-echo "<p class='design' style='text-align:center;'>Unable to withdraw funds at the moment: </p>" . mysqli_error($conn);
-}
-}
-
-else
-{
-echo "You don't have enough money for this transaction.";
-}
 
 mysqli_close($conn);
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
