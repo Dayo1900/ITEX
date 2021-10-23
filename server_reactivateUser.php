@@ -10,54 +10,55 @@ $conn = mysqli_connect('localhost', 'id17048003_gahs', 'Temitope.1900', 'id17048
 //check connection
 if (!$conn) 
 { 
-  die("Connection failed: " . mysqli_connect_error());
+  die("Connection failed: Unable to connect to server.");
 }
 
 // this page shows how to restore deactivated users back into table registration and remove their records from table store_account
 //the user will submit his email for reactivation and this email will be used to get his records from store_account
 
+
+$email_reactivate = $_SESSION['email_reactivate'];
+
 //select user info from store_account
-$reactivate="SELECT * FROM store_account WHERE email='$email'";
+$reactivate="SELECT * FROM store_account WHERE email='$email_reactivate'";
 $result = mysqli_query($conn, $reactivate);
 
 while($row = mysqli_fetch_assoc($result))         //fetch associative array 
 {
-$email = $row["email"];
+$email_return = $row["email"];
 $fname = $row['fname'];
 $sname = $row['sname'];
 $nin = $row['nin'];
 $account_balance = $row['account_balance'];
 }
 
-//create new record for user in table registration
-$return_user = "INSERT INTO registration (email, fname, sname, nin, account_balance) VALUES ('$email', '$fname', '$sname', $nin, $account_balance)";
-$user = mysqli_query($conn, $return_user);
+$password = md5($_SESSION['password_reactivate']);
 
-//assign to session variables
-    while($row2 = mysqli_fetch_assoc($user))         //fetch associative array 
+//inform user that his email wasn't deactivated(this only applies to users who are not sure if their account still exists)
+if(mysqli_num_rows($result) ==0)
 {
-$_SESSION["email"] = $row2["email"];
-$_SESSION["fname"] = $row2['fname'];
-$_SESSION["sname"] = $row2['sname'];
-$_SESSION["nin"] = $row2['nin'];
-$_SESSION["account_balance"] = $row2['account_balance'];
+    echo "<p class='design' style='text-align:center; color:purple;'>" .$email_reactivate. " was not deactivated.<br>Thank you.</p>";
+    exit();
 }
 
+//create new record for user in table registration
+$return_user = "INSERT INTO registration (email, fname, sname, nin, password, account_balance) VALUES ('$email_return', '$fname', '$sname', '$nin', '$password', $account_balance)";
 
-//on the front page, the user will be prompted to provide a new password which will be submitted in a form
-if (($_POST["password_1"]) !== ($_POST["password_2"]))
-{return false;}
-else {$password = md5($password_1);} //encrypt the password before saving in the database
 
-//insert new password into table
-$submit_password = "INSERT INTO registration (password) VALUES ('$password')";
+//delete user info from store_account
+$delete="DELETE FROM store_account WHERE email='$email_reactivate'";
 
 
 //give feedback on operations
-if (mysqli_query($conn, $submit_password))
-{ echo "Your account has been reactivated";}
+if (mysqli_query($conn, $return_user))
+{ 
+    echo "<p class='design' style='text-align:center; color:purple;'>Your account has been reactivated</p>";
+    echo "<meta http-equiv='refresh'  content='2;url=itex_login.php'>";
+}
 
-else { echo "Unable to reactivate account at the moment" . mysqli_error();}
+else { 
+    echo "<p class='design' style='text-align:center; color:purple;'>Unable to reactivate account due to network issues<br>Try again later.</p>";
+}
 
 mysqli_close($conn);
 
