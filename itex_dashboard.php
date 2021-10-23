@@ -22,23 +22,29 @@ return false;
 <meta name="keywords" content="'itex', 'wallet'">
 
 <link rel="stylesheet" type="text/css" href="itex_design.css">
-<link rel="stylesheet" type="text/css" media="(max-width:990px)" href="itex_design990px.css">
-<link rel="stylesheet" type="text/css" media="(max-width:630px)" href="itex_design630px.css">	
+<link rel="stylesheet" type="text/css" media="(max-width:1199px)" href="itex_design1199px.css">
+<link rel="stylesheet" type="text/css" media="(max-width:860px)" href="itex_design860px.css">
+<link rel="stylesheet" type="text/css" media="(max-width:600px)" href="itex_design600px.css">
 <link rel="stylesheet" type="text/css" media="(max-width:330px)" href="itex_design330px.css">
+
+</head>
 </head>
 
 <body>
  
     
 <!--Design the dashboard page--> 
+<a class="logout" href="itex_logout.php"> Logout</a>
+
+
   <h1 style="text-align:center; color:#003399; margin-top:2.5%; font-size:2.5rem;"> Wallet Dashboard </h1>
-//welcome section
+<!--welcome section-->
 <div class="dashboard">
 <span class="firstSpan">           
 <p style='font-size:1.2rem;'>Welcome <?php echo $_SESSION['fname']. " " .$_SESSION['sname'];?>.</p><br>
-<p> Account balance: <?php echo $_SESSION['account_balance'];
-			if( empty($_SESSION['account_balance']))
-			{echo "&#8358 0.00";} ?> </p></span>
+<p> Account balance: <?php
+$balance = number_format($_SESSION['account_balance']);
+echo "&#8358;" .$balance; ?> </p></span>
 
 <span class="secondSpan">
 <?php 
@@ -46,9 +52,8 @@ date_default_timezone_set("Africa/Lagos");	//set time zone to Lagos
 echo date('d-m-Y') ."<br><br><br><br>";
 ?>
 <!--link to profile page-->
-<p><a class="c2" href="profile_page"> My Profile</a></p>
-	<!--link to delete wallet account-->
-<p><a class="c2" href="server_deleteAccount.php">Delete wallet</a></p>
+	<!--link to deactivate wallet account-->
+<p><a class="c2" href="itex_deactivateUser.php">Deactivate wallet</a></p>
 </span>
 </div>
 
@@ -62,7 +67,7 @@ echo date('d-m-Y') ."<br><br><br><br>";
 <!--link to withdraw funds-->
 <span class="secondSpan">
 <p><a class="c2" href="itex_withdrawMoney.php"> Withdraw money</a><p>
-<small style="margin:auto;"> Withdraw money from your itex wallet.</small>
+<small style="margin:auto;"> Withdraw money from <br>your itex wallet.</small>
 </span>
 </div>
 
@@ -74,8 +79,14 @@ echo date('d-m-Y') ."<br><br><br><br>";
  letter-spacing:0.05rem;">
 <?php
 //present a summary of transactions and give timestamp
-echo $_SESSION['transaction_history'];                
-?></p> 
+echo $_SESSION['transaction_history'];               
+
+if(empty($_SESSION['transaction_history']))
+{
+    echo "<p style='text-align:center;'>There are no transactions yet</p>";
+}
+?>
+</p> 
 </div>
 
              
