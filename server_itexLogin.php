@@ -1,8 +1,5 @@
 <?php 
-//This script will login users from the server
 
-// error reporting
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 //connect to database
 $conn = mysqli_connect('localhost', 'id17048003_gahs', 'Temitope.1900', 'id17048003_customer');
@@ -13,8 +10,11 @@ if (!$conn)
   die("Connection failed: " . mysqli_connect_error());
 }
 
+
+
 //select data from database
-$sql = "SELECT ID, email, password, fname, sname, nin, stamp, account_balance, transaction_history FROM registration WHERE email = '$email' AND password = '$password'";
+//$result = mysqli_query($link, "SELECT * FROM City", MYSQLI_USE_RESULT);
+$sql =  "SELECT ID, email, password, fname, sname, nin, withdrawMoney, addMoney, account_balance, transaction_history FROM registration WHERE email = '$email' AND password = '$password'";  
 $result = mysqli_query($conn, $sql);
 
 
@@ -26,22 +26,24 @@ $_SESSION["password"] = $row["password"];
 $_SESSION["fname"] = $row['fname'];
 $_SESSION["sname"] = $row['sname'];
 $_SESSION["nin"] = $row['nin'];
-$_SESSION["stamp"] = $row['stamp'];
+$_SESSION["addMoney"] = $row["addMoney"];
+$_SESSION["withdrawMoney"] = $row["withdrawMoney"];
 $_SESSION["account_balance"] = $row['account_balance'];
 $_SESSION["transaction_history"] = $row['transaction_history'];
 }
 
-if(isset($_SESSION['email']))
+if(isset($_SESSION["email"]))
 {
 printf("<p class='design' style='color:purple;'> You are now logged in.</p>");
- echo "<meta http-equiv='refresh' content='2;url=itex_dashboard.php' />";
+ echo "<meta http-equiv='refresh' content='2;url=itex_dashboard.php' >";
 }
 
 
-elseif(mysqli_num_rows($result)==0)
+else
 {
-echo "<p class='error'>*Incorrect email or password. </p>";
+echo "<p class='error'>*Incorrect email or password. </p>" .mysqli_error($conn);
 return false;
+exit();
 }
 
 
