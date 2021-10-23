@@ -1,0 +1,504 @@
+body, html 
+{
+width:100vw;
+height:100vh;
+}
+
+.logo
+{
+display:grid;
+align-items:center;
+width:100%;
+margin:auto;
+margin-top:3%;
+margin-bottom:3%;
+}
+
+.links
+{
+display:block;
+align-items:center;
+margin:auto;
+margin-top:2%;
+margin-bottom:2%;
+width:60%;
+height:auto;
+}
+
+.login
+
+{
+   text-align:center;
+   text-decoration:none;
+
+   color:white;
+
+   font-weight:bold;
+
+   float:left;  
+   background-color:#24248f;
+ 
+   font-size:1.1rem;
+  
+   width:auto;
+
+   height:auto;
+   padding:1em 2em; 
+}
+
+.login:hover
+{
+   background-color:grey;
+}
+
+
+.loginTwo
+{
+   text-decoration:none;
+
+  text-align:center;
+   color:white;
+
+   font-weight:bold;
+
+   position:absolute;
+   top:0.5rem;
+   left:0.5rem; 
+   margin-bottom:2em;
+   float:left;  
+   background-color:#24248f;
+ 
+   background-size:3em 6em;
+  
+   font-size:1.5rem;
+  
+   padding:0.04em 0.01em;
+
+}
+
+.loginTwo:hover
+{
+   background-color:grey;
+}
+
+.login2
+{  text-align:center;
+   text-decoration:none;
+
+   font-size:1.5rem;
+
+   color:white;
+
+   font-weight:bold;
+ 
+   background-color:#24248f;
+ 
+   width:40%;
+   display:grid;
+   align-items:center;
+   margin:auto;
+   margin-top:7%;
+   margin-bottom:5%;
+}
+
+.login2:hover
+{
+   background-color:grey;
+} 
+
+.register
+{
+   text-align:center;
+   text-decoration:none;
+
+   color:white;
+
+   font-weight:bold;
+
+   float:right;  
+   background-color:#24248f;
+ 
+   font-size:1.1rem;
+  
+   width:auto;
+
+   height:auto;
+   padding:0.9em 1.8em; 
+} 
+    
+
+.register:hover
+{
+   background-color:grey;
+}
+
+.logout
+
+{
+   text-decoration:none;
+
+   color:white;
+
+   font-weight:bold;
+
+   position:absolute;
+   top:2em;
+   left:2em;
+   float:left;  
+   text-align:center;
+   background-color:#24248f;
+ 
+   font-size:1em;
+  
+   width:auto;
+
+   height:auto;
+   padding:0.2em; 
+}
+
+.logout:hover
+{
+   background-color:grey;
+}
+
+.colour
+{
+background-color:#e6f2ff;
+}
+
+.a
+{
+background-color:white;
+width:65%;
+height:auto;
+position:relative;
+top:6%;
+margin:auto;
+margin-bottom:2em;
+padding:5% 7%;
+border-radius:0.4em;
+-moz-box-shadow: inset 1px 1px 5px #24248f;
+-webkit-box-shadow:inset 1px 1px 5px #24248f;
+box-shadow: inset 1px 1px 5px #24248f;
+}
+
+.a2
+{
+background-color:white;
+width:60%;
+height:auto;
+position:relative;
+top:10%;
+margin:auto;
+padding:5% 1%;
+border-radius:0.4em;
+border:1px solid #86592d;
+}
+
+.b {
+
+  width: 90%;
+  border: none;
+
+  border-bottom: 0.0625rem solid #003399;
+
+  padding-top: 2em;
+
+  margin: 0.5rem;
+
+  margin-bottom: 2.5em;
+
+}
+
+.b2 {
+
+  width: 75%;
+  border: none;
+
+  float:right;
+  padding-top:0.2em;
+  border-bottom: 0.0625rem solid #003399;
+
+}
+
+.c
+{
+   text-decoration:none;
+
+   color:#003399;
+
+   font-weight:bold;
+
+   text-align:center; 
+   display:grid;
+   align-items:center;
+   margin:4% auto 2% auto; 
+   border:1px solid purple;
+   background-color:#e6f2ff;
+   background-size:3em 6em;
+  
+   font-size:1.1rem;
+  
+   padding:0.48em 1.5em;
+
+}
+
+.c2
+{
+   text-decoration:none;
+
+   color:white;
+
+   font-weight:bold;
+
+   text-align:center;  
+   border:none;
+   width:30%;
+   background-color:#0077b3; 
+   font-size:1.1rem;
+  
+   padding:0.1em 0;
+
+}
+
+.c:hover { background-color:white;}
+
+.c2:hover {background-color:lightblue;}
+
+.c3:hover {background-color:white;}
+
+
+.c3
+{
+   text-decoration:none;
+
+   color:#003399;
+
+   font-weight:bold;
+
+   text-align:center; 
+   display:grid;
+   align-items:center;
+   margin:auto; 
+   margin-top:4em;
+   border:1px solid purple;
+   background-color:#e6f2ff;
+   width:35%; 
+   font-size:1.1rem;
+  
+   padding:0.32em 0;
+
+}
+
+.d{
+
+  font-family:verdana, sans-serif;
+  float:left;
+  display:inline;
+}
+
+
+
+.d2
+{
+
+  font-family:verdana, sans-serif;
+  float:left;
+  display:inline;
+}
+
+
+
+.align
+{
+width:100%;
+height:auto;
+padding:1em;
+margin-bottom:6%;
+}
+
+.design
+{
+ margin-top:5%;
+ text-align:center;
+ font-size:0.9em;
+ font-family:verdana, sans-serif;
+}
+
+
+
+.location { 
+float:left;
+width:auto;
+height:auto;
+text-align:center;
+font-family:'Trebuchet Ms', sans-serif;
+
+letter-spacing:0.05rem;
+
+box-shadow:0.3125rem 0.125rem 0.3125rem 0.125rem #e6e6e6;
+border-left:1px solid #e6e6e6;
+
+box-sizing:content-box;
+
+margin:auto;
+
+padding:0.7rem;
+}
+
+
+.email {
+width: 50%;
+height:auto;
+padding:0.3em;
+padding-bottom:1em;
+display:grid;
+align-items:center;
+margin:auto;
+background-color: #f5f5f0;
+-webkit-box-shadow:inset 1px 1px 1px 1px #f9f2ec; 
+-moz-box-shadow:inset 1px 1px 1px 1px #f9f2ec; 
+box-shadow:inset 1px 1px 1px 1px #f9f2ec; 
+
+}
+
+.email2 {
+width: 50%;
+height:auto;
+padding:0.3em;
+padding-bottom:1em;
+display:grid;
+align-items:center;
+margin:auto;
+background-color: #f5f5f0;
+-webkit-box-shadow:inset 1px 1px 1px 1px #f9f2ec; 
+-moz-box-shadow:inset 1px 1px 1px 1px #f9f2ec; 
+box-shadow:inset 1px 1px 1px 1px #f9f2ec; 
+}
+
+
+.confirm {
+width:77%;
+padding:1rem;
+border:1px solid purple;
+display:grid;
+align-items:center;
+margin:5% auto;
+}
+
+
+
+.password {
+margin-top:7%; 
+text-align:center; 
+font-size:2rem;
+}
+
+
+
+.confirm_password {
+display:grid;
+align-items:center;
+margin:auto; 
+padding:0.4em;
+width:auto;
+height:auto;
+border:1px solid lightblue;
+background-color:lightblue;
+font-family:Helvetica, sans-serif;
+letter-spacing:0.05em;
+font-size:1em;
+
+}
+
+.confirm_password:hover {background-color:white;}
+
+
+
+
+
+.error 
+{
+
+  color:red;
+
+  font-family:'Verdana', sans-serif;
+
+}
+
+.dashboard
+{
+width:90vw;
+height:auto;
+margin:4% auto 1%;
+display:grid;
+align-items:center;
+padding:4%;
+border-bottom:1px solid #24248f;
+background-color:#ebebfa;
+}
+
+.firstSpan
+{
+float:left;
+font-family:'Trebuchet Ms', sans-serif;
+
+letter-spacing:0.05rem;
+}
+
+.secondSpan
+{
+float:right;
+font-family:'Trebuchet Ms', sans-serif;
+
+letter-spacing:0.05rem;
+}
+
+.secondSpan2
+{
+float:right;
+font-family:'Trebuchet Ms', sans-serif;
+
+letter-spacing:0.05rem;
+margin-right: 5.3%;
+}
+
+.cardOne
+{
+border:1px solid black;
+width:100%;
+height:2rem;
+}
+
+.part
+{
+width:45%;
+height:2rem;
+float:left;
+}
+
+.part2
+{
+width:25%;
+height:2rem;
+float:right;
+ padding-left:25%;
+} 
+
+.card
+{
+  
+  width: 60%;
+  height:3rem;
+  border: none;
+
+  float:right;
+  margin:0;
+ margin-right:5%;
+  background-color:#f0f0f5;
+}
+
+.card:hover
+{
+background-color: #e6e6e6;
+}
