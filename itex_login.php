@@ -12,14 +12,14 @@
 <meta name="keywords" content="itex">
 
 <link rel="stylesheet" type="text/css" href="itex_design.css">
-<link rel="stylesheet" type="text/css" media="(max-width:990px)" href="itex_design990px.css">
-<link rel="stylesheet" type="text/css" media="(max-width:630px)" href="itex_design630px.css">	
+<link rel="stylesheet" type="text/css" media="(max-width:1199px)" href="itex_design1199px.css">
+<link rel="stylesheet" type="text/css" media="(max-width:860px)" href="itex_design860px.css">
+<link rel="stylesheet" type="text/css" media="(max-width:600px)" href="itex_design600px.css">
 <link rel="stylesheet" type="text/css" media="(max-width:330px)" href="itex_design330px.css">
 </head>
 
 
 <body class="colour">
-
 
 <?php 
 if (isset ($_POST["login"]))           //begin the log in process once the login button is clicked
@@ -29,10 +29,9 @@ $email=$password="";                    //define variables and initialise to emp
 $email=($_POST['email']);
 $password=md5($_POST['password']);
 
-include 'server_itexLogin.php';         //this script will login users
+include 'server_itexLogin.php';
 }
 ?>
-
 
 <!-- Design the login page -->
 <h1 style="text-align:center; color:#003399; margin-top:4%; font-size:2.5rem;"> Login </h1>
@@ -44,18 +43,23 @@ include 'server_itexLogin.php';         //this script will login users
       
   <input class="b" type="email" name="email" placeholder="Email" required autocomplete="on"><br>
          <span class="error"> <?php if ((isset ($_POST["login"])) && (empty ($_POST["email"])))
-                                     {echo "*Email required";}  ?> </span>
+                                     {echo("*Email required");
+                                     return false;
+                                     exit();}  ?> </span>
   
   <input class="b" type="password" name="password" placeholder="Password" required> 
          <span class="error"> <?php if((isset ($_POST["login"])) && (empty ($_POST["password"])))
-                                     {echo "*Password required";}  ?> </span>
+                                     {echo("*Password required");
+                                     return false;
+                                     exit();}  ?> </span>
   
     <input class="c" style="box-shadow:none;" type="submit" name="login" value="Login">
  </form>
  </div>  
+ 
 <br>
+<p class="design"> <a href="email_resetPassword.php">Forgot your password?</a></p>
 <p class="design"> Not yet registered? <a href="itex_register.php"> Create account.</a></p>
-
 
 
 </body>
