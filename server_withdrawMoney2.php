@@ -3,10 +3,10 @@ error_reporting(0);
 
 
 // initiate connection with database
-$servername="localhost";
-$username="id17048003_gahs";
-$password="Temitope.1900";
-$databasename="id17048003_customer";
+$servername="*****";
+$username="*****";
+$password="*****";
+$databasename="*****";
 
 
 //connect to database
