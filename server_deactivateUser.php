@@ -1,7 +1,7 @@
 <?php
 
 // initiate connection with database
-$conn = mysqli_connect('localhost', 'id17048003_gahs', 'Temitope.1900', 'id17048003_customer');
+$conn = mysqli_connect('******', '********', '******', '***');
 
 
 //check connection
