@@ -39,11 +39,11 @@ else{}
 // initiate connection with database
 $servername="localhost";
 
-$username="id17048003_gahs";
+$username="***";
 
-$password="Temitope.1900";
+$password="****";
 
-$databasename="id17048003_customer";
+$databasename="****";
 
 
 //connect to database
