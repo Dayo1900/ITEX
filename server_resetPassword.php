@@ -12,7 +12,7 @@ require 'PHPMailer/src/POP3.php';
 
 
 //connect to database
-$conn = mysqli_connect('localhost', 'id17048003_gahs', 'Temitope.1900', 'id17048003_customer');
+$conn = mysqli_connect('****', '*****', '*****', '*****');
 
 //check connection
 if (!$conn) 
@@ -43,16 +43,16 @@ try {
     $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = 'smtp.mail.yahoo.com';                  // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
-    $mail->Username = 'boselamo@yahoo.com';             // SMTP username
-    $mail->Password = 'moqmtksecuthtsgg';                           // SMTP password
+    $mail->Username = '*****@yahoo.com';             // SMTP username
+    $mail->Password = '******';                           // SMTP password
     $mail->SMTPSecure = 'ssl';                            // Enable SSL encryption, TLS also accepted with port 465
-    $mail->Port = 465;                                    // TCP port to connect to
+    $mail->Port = ***;                                    // TCP port to connect to
 
     //Recipients
-    $mail->setFrom('boselamo@yahoo.com', 'ITEX-demonstration');          //This is the email your form sends From
+    $mail->setFrom('*******@yahoo.com', 'ITEX-demonstration');          //This is the email your form sends From
     $mail->addAddress($searchEmail); // Add a recipient address
     //$mail->addAddress('contact@example.com');               // Name is optional
-    $mail->addReplyTo('boselamo@yahoo.com');
+    $mail->addReplyTo('******@yahoo.com');
     //$mail->addCC('cc@example.com');
     //$mail->addBCC('bcc@example.com');
 
